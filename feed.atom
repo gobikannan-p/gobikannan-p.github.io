@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<link rel="self" href="https://blog.gkviews.com/" />
+	<id>https://blog.gkviews.com/</id>
+	<title>GK Views</title>
+	<rights>2017</rights>
+	<updated>2017-10-04T18:20:44Z</updated>
+	<subtitle>GK Views</subtitle>
+	<entry>
+		<link href="https://blog.gkviews.com/posts/first-post" />
+		<id>https://blog.gkviews.com/posts/first-post</id>
+		<title>First Post</title>
+		<updated>2016-01-01T00:00:00Z</updated>
+		<content>&lt;p&gt;This is my first post!&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;This is my first post!&lt;/p&gt;</summary>
+	</entry>
+</feed>
