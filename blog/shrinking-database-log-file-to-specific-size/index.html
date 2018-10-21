@@ -1,0 +1,1393 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://www.gkviews.com/"
+        },
+        "articleSection" : "blog",
+        "name" : "Shrinking database log file to specific size",
+        "headline" : "Shrinking database log file to specific size",
+        "description" : "Shrinking database log file to specific size",
+        "inLanguage" : "en",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2017",
+        "datePublished": "2017-05-25 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2017-05-25 00:00:00 &#43;0000 UTC",
+        "url" : "https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/",
+        "wordCount" : "283",
+        "keywords" : [ "MS SQL","Blog" ]
+    }
+    </script>
+        
+            
+                <title>Shrinking database log file to specific size</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.44" />
+        
+  
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='https://www.gkviews.com/favicon/apple-touch-icon-precomposed.png'>
+  <link rel="icon" href='https://www.gkviews.com/favicon/favicon.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile.png'>
+  <meta name="application-name" content="GK Views">
+  <meta name="msapplication-tooltip" content="A Reference book...">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+            <meta name="author" content="Gobikannan">
+        
+        
+            <meta name="description" content="Shrinking database log file to specific size">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shrinking database log file to specific size"/>
+<meta name="twitter:description" content="Shrinking database log file to specific size"/>
+<meta name="twitter:site" content="@gobikannanp"/>
+
+        <meta property="og:title" content="Shrinking database log file to specific size" />
+<meta property="og:description" content="Shrinking database log file to specific size" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/" />
+
+
+
+<meta property="article:published_time" content="2017-05-25T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-05-25T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+        <meta property="og:image" content="https://www.gkviews.com//images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        
+<meta itemprop="name" content="Shrinking database log file to specific size">
+<meta itemprop="description" content="Shrinking database log file to specific size">
+
+
+<meta itemprop="datePublished" content="2017-05-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-05-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="283">
+
+
+
+<meta itemprop="keywords" content="MS SQL," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="https://www.gkviews.com/css/main.css">
+            <link rel="stylesheet" href="https://www.gkviews.com/css/add-on.css">
+            <link rel="stylesheet" href="https://www.gkviews.com/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      <h1><a href="https://www.gkviews.com/">blog</a></h1>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="https://www.gkviews.com/">
+                            <i class="fa fa-home">&nbsp;</i>Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.gkviews.com/about/">
+                            <i class="fa fa-id-card-o">&nbsp;</i>About
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.gkviews.com/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.gkviews.com/categories/">
+                            <i class="fa fa-sitemap">&nbsp;</i>Categories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.gkviews.com/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="https://www.gkviews.com/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="https://www.gkviews.com/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="https://www.gkviews.com/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Home
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.gkviews.com/about/">
+                            <h3>
+                                <i class="fa fa-id-card-o">&nbsp;</i>About
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.gkviews.com/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.gkviews.com/categories/">
+                            <h3>
+                                <i class="fa fa-sitemap">&nbsp;</i>Categories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.gkviews.com/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section class="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/">Connection string from app.config in windows application</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2017-05-25'>
+                                    May 25, 2017</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.gkviews.com/blog/how-to-change-username-in-wordpress/">How to change username in WordPress</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2017-05-25'>
+                                    May 25, 2017</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/how-to-change-username-in-wordpress/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.gkviews.com/blog/interesting-facts-about-numbers/">Interesting Facts About Numbers</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2017-05-25'>
+                                    May 25, 2017</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/interesting-facts-about-numbers/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/">Shrinking database log file to specific size</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2017-05-25'>
+                                    May 25, 2017</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/">Windowless ActiveX controls are not supported</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2017-05-25'>
+                                    May 25, 2017</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/DEP_1.png" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">View more posts</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;text=Shrinking%20database%20log%20file%20to%20specific%20size&amp;via=gobikannanp" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;description=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by Gobikannan&amp;body=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/">Shrinking database log file to specific size</a></h1>
+            
+        
+        
+            <p>Shrinking database log file to specific size</p>
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2017-05-25'>
+            May 25, 2017</time>
+        <span class="author">Gobikannan</span>
+        
+            <p>2 minute read</p>
+        
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;text=Shrinking%20database%20log%20file%20to%20specific%20size&amp;via=gobikannanp" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;title=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f&amp;description=Shrinking%20database%20log%20file%20to%20specific%20size" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by Gobikannan&amp;body=https%3a%2f%2fwww.gkviews.com%2fblog%2fshrinking-database-log-file-to-specific-size%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+  <div id="content">
+    <p>In MS SQL server there may be a chance to get “The log file for database ‘DatabaseName’ is full.”</p>
+
+<p>One of the way to fix this problem is backup the database and shrinking database log file to specific size. You can use Right click on database and choose Task -&gt; Shrink -&gt; Database in Microsoft SQL Server Management Studio to shrink the database. You can shrink the database file using Task -&gt; Shrink -&gt; File to shrink the Log or Data file. Instead of this, you can use the SQL script to shrink the log file.</p>
+
+<p>The syntax to shrink the database log file is as follows.</p>
+
+<pre><code class="language-SQL">USE DatabaseName;
+GO
+-- Truncate the log by changing the database recovery model to SIMPLE.
+ALTER DATABASE DatabaseName
+SET RECOVERY SIMPLE;
+GO
+-- Shrink the truncated log file to (specify size here) 1 MB.
+DBCC SHRINKFILE (DatabaseName_log, 1);
+GO
+-- Reset the database recovery model.
+ALTER DATABASE DatabaseName
+SET RECOVERY FULL;
+GO
+</code></pre>
+
+<p>In this syntax DatabaseName is name of your database.</p>
+
+<p>DatabaseName_log is logical name of your database. (Not physical file name of the database log file)</p>
+
+<p>You can get this log file name using the following way.</p>
+
+<p>Open the MS SQL Server Management Studio.</p>
+
+<p>Select the database property by right click the database in Object explorer.</p>
+
+<p>Click the Files page (below to the General).</p>
+
+<p>Now you can see the logical name for the database in the Database files grid under Logical Name column.</p>
+
+<p>For Example</p>
+
+<pre><code class="language-SQL">USE AdventureWorks;
+GO
+ALTER DATABASE AdventureWorks
+SET RECOVERY SIMPLE;
+GO
+-- Shrink the truncated log file to 1 MB.
+DBCC SHRINKFILE (AdventureWorks_Log, 1);
+GO
+ALTER DATABASE AdventureWorks
+SET RECOVERY FULL;
+GO
+</code></pre>
+
+<p>Here the logical name of the database is “AdventureWorks_Log”</p>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="https://www.gkviews.com/categories/microsoft-sql">Microsoft SQL</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="https://www.gkviews.com/tags/ms-sql">MS SQL</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "gkviews-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/"
+                class="button big previous">Windowless ActiveX controls are not supported</a></li>
+    
+
+    
+        <li><a href="https://www.gkviews.com/blog/interesting-facts-about-numbers/"
+                class="button big next">Interesting Facts About Numbers</a></li>
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+      
+        <a href='https://www.gkviews.com/' class="logo"><img src="https://www.gkviews.com/img/main/logo.png" alt="GK Views" /></a>
+      
+    
+    
+      <header>
+        <h2>GK Views</h2>
+        <p>A Reference book... <i class='fa fa-hand-peace-o'></i></p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://www.gkviews.com/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/gobikannan-p" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//linkedin.com/in/gobikannan" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//facebook.com/gkviews" target="_blank" title="Facebook" class="fa fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/gobikannanp" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section class="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Recent Posts</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/">Connection string from app.config in windows application</a>
+              </h3>
+              
+              <time class="published" datetime='2017-05-25'>
+                May 25, 2017
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.gkviews.com/blog/how-to-change-username-in-wordpress/">How to change username in WordPress</a>
+              </h3>
+              
+              <time class="published" datetime='2017-05-25'>
+                May 25, 2017
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/how-to-change-username-in-wordpress/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.gkviews.com/blog/interesting-facts-about-numbers/">Interesting Facts About Numbers</a>
+              </h3>
+              
+              <time class="published" datetime='2017-05-25'>
+                May 25, 2017
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/interesting-facts-about-numbers/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/">Shrinking database log file to specific size</a>
+              </h3>
+              
+              <time class="published" datetime='2017-05-25'>
+                May 25, 2017
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/pic03.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/">Windowless ActiveX controls are not supported</a>
+              </h3>
+              
+              <time class="published" datetime='2017-05-25'>
+                May 25, 2017
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/" class="image featured">
+            <img src="https://www.gkviews.com/img/p/DEP_1.png" alt="">
+        </a>
+    
+
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">View more posts</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="https://www.gkviews.com/categories/">Categories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.gkviews.com/categories/general/">General</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.gkviews.com/categories/microsoft-.net/">Microsoft .Net</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.gkviews.com/categories/microsoft-sql/">Microsoft SQL</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+  
+  
+    <section id="mini-bio">
+      <h3>About</h3>
+      <p>GK Views is to share some general information or technical details which I came through.</p>
+      <a href="https://www.gkviews.com/about/" class="button">Learn More</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://www.gkviews.com/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/gobikannan-p" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//linkedin.com/in/gobikannan" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//facebook.com/gkviews" target="_blank" title="Facebook" class="fa fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//twitter.com/gobikannanp" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2017
+        
+          GK Views
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="https://www.gkviews.com/js/util.js"></script>
+      <script src="https://www.gkviews.com/js/main.js"></script>
+      <script src="https://www.gkviews.com/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+      <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </body>
+</html>
+

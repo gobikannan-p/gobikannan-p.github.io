@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MS.Net on GK Views</title>
+    <link>https://www.gkviews.com/tags/ms.net/</link>
+    <description>Recent content in MS.Net on GK Views</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.gkviews.com/tags/ms.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Connection string from app.config in windows application</title>
+      <link>https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/</guid>
+      <description>In windows application configuration file, connection strings for your database can be stored as key/value pairs in the connectionStrings section of the configuration element.
+&amp;lt;configuration&amp;gt; &amp;lt;connectionStrings&amp;gt; &amp;lt;add name=&amp;quot;MyDBConnection&amp;quot; connectionString=&amp;quot;Server=xxxx; UID=xxxx; PWD=xxxx; Database=xxxx;&amp;quot; /&amp;gt; &amp;lt;/connectionStrings&amp;gt; &amp;lt;/configuration&amp;gt;  To access your connection string from the configuration file you need to use the following code.
+string connectionString = ConfigurationManager.ConnectionStrings[&amp;quot;MyDBConnection&amp;quot;].ConnectionString;  The ConfigurationManager class in included with in the System.Configuration namespace.
+using System.Configuration;  After the using statement included, compiler says that</description>
+    </item>
+    
+  </channel>
+</rss>

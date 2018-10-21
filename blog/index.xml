@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on GK Views</title>
+    <link>https://www.gkviews.com/blog/</link>
+    <description>Recent content in Blog on GK Views</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.gkviews.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Connection string from app.config in windows application</title>
+      <link>https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/connection-string-from-app-config-in-windows-application/</guid>
+      <description>In windows application configuration file, connection strings for your database can be stored as key/value pairs in the connectionStrings section of the configuration element.
+&amp;lt;configuration&amp;gt; &amp;lt;connectionStrings&amp;gt; &amp;lt;add name=&amp;quot;MyDBConnection&amp;quot; connectionString=&amp;quot;Server=xxxx; UID=xxxx; PWD=xxxx; Database=xxxx;&amp;quot; /&amp;gt; &amp;lt;/connectionStrings&amp;gt; &amp;lt;/configuration&amp;gt;  To access your connection string from the configuration file you need to use the following code.
+string connectionString = ConfigurationManager.ConnectionStrings[&amp;quot;MyDBConnection&amp;quot;].ConnectionString;  The ConfigurationManager class in included with in the System.Configuration namespace.
+using System.Configuration;  After the using statement included, compiler says that</description>
+    </item>
+    
+    <item>
+      <title>How to change username in WordPress</title>
+      <link>https://www.gkviews.com/blog/how-to-change-username-in-wordpress/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/how-to-change-username-in-wordpress/</guid>
+      <description>There are three ways to change username in WordPress.
+First one is using Add New User in WordPress:-
+ Login to your WordPress dashboard. Click on Add New User in User section and provide user details. Maksure that the role should be Administrator then click on Add User.   Log out current user session and Login again using new user credentialOnce you logged in successfully, Go to User section. Select the admin user and then click delete button.</description>
+    </item>
+    
+    <item>
+      <title>Interesting Facts About Numbers</title>
+      <link>https://www.gkviews.com/blog/interesting-facts-about-numbers/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/interesting-facts-about-numbers/</guid>
+      <description>The letters A,B,C and D do not appear in the spelling of 1 to 99 (That is ONE, TWO, .. NINETY NINE). The letter D appears first time in HUNDRED. The letter A appears first time in THOUSAND. The letter B appears first time in BILLION. The letter C appears first time in CORER. Very interesting isn’t it? Share here if you know any interesting facts about numbers.</description>
+    </item>
+    
+    <item>
+      <title>Shrinking database log file to specific size</title>
+      <link>https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/</guid>
+      <description>In MS SQL server there may be a chance to get “The log file for database ‘DatabaseName’ is full.”
+One of the way to fix this problem is backup the database and shrinking database log file to specific size. You can use Right click on database and choose Task -&amp;gt; Shrink -&amp;gt; Database in Microsoft SQL Server Management Studio to shrink the database. You can shrink the database file using Task -&amp;gt; Shrink -&amp;gt; File to shrink the Log or Data file.</description>
+    </item>
+    
+    <item>
+      <title>Windowless ActiveX controls are not supported</title>
+      <link>https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/windowless-activex-controls-are-not-supported/</guid>
+      <description>In windows 7 environment you may receive “Unable to get window handle, Windowless ActiveX controls are not supported..” exception, when you display a child form that contains ActiveX user controls. The user control may be a third party control. To avoid this exception you may disable DEP (Data Execution Prevention) for your ActiveX control.
+DEP (Data Execution Prevention) is a security feature from windows 7 operating system to prevent damage your system from viruses and other security threats.</description>
+    </item>
+    
+  </channel>
+</rss>

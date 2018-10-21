@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Microsoft SQL on GK Views</title>
+    <link>https://www.gkviews.com/categories/microsoft-sql/</link>
+    <description>Recent content in Microsoft SQL on GK Views</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.gkviews.com/categories/microsoft-sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shrinking database log file to specific size</title>
+      <link>https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.gkviews.com/blog/shrinking-database-log-file-to-specific-size/</guid>
+      <description>In MS SQL server there may be a chance to get “The log file for database ‘DatabaseName’ is full.”
+One of the way to fix this problem is backup the database and shrinking database log file to specific size. You can use Right click on database and choose Task -&amp;gt; Shrink -&amp;gt; Database in Microsoft SQL Server Management Studio to shrink the database. You can shrink the database file using Task -&amp;gt; Shrink -&amp;gt; File to shrink the Log or Data file.</description>
+    </item>
+    
+  </channel>
+</rss>
